@@ -8,7 +8,7 @@ RPMP-Restful Plugin Midware for Pascal 是基于 mORmot 和 Qplugins 框架二�
 
 ## 关于文档帮助
 	
-  QQ 群: 289501953  
+  QQ 群: 937640564
 	  作者QQ: 304129766
     邮箱: 304129766@qq.com
 
