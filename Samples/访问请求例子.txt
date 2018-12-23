@@ -1,0 +1,7 @@
+∑√Œ µÿ÷∑£∫
+
+  http://127.0.0.1:8080/RpmpData/logininfo/1.0
+
+«Î«Ûjson¥Æ: 
+ 
+{"usercode":"8889232","perjmcode":"01deb483c9cb3dd55bf2aea7ae42a86e1e832b17","tasktype":"100","taskuser":"100101"
