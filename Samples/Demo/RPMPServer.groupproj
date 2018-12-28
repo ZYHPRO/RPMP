@@ -1,0 +1,72 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{E737629D-2424-4239-A895-C7BDD4DC9E81}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Host\RPMPServer.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Plugin\RouteProxy\RouteProxy.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Plugin\TaskPlugDLL\TaskPlugDLL.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Plugin\TaskPlugDLL1\TaskPlugDLL1.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="RPMPServer">
+        <MSBuild Projects="Host\RPMPServer.dproj"/>
+    </Target>
+    <Target Name="RPMPServer:Clean">
+        <MSBuild Projects="Host\RPMPServer.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="RPMPServer:Make">
+        <MSBuild Projects="Host\RPMPServer.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="RouteProxy">
+        <MSBuild Projects="Plugin\RouteProxy\RouteProxy.dproj"/>
+    </Target>
+    <Target Name="RouteProxy:Clean">
+        <MSBuild Projects="Plugin\RouteProxy\RouteProxy.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="RouteProxy:Make">
+        <MSBuild Projects="Plugin\RouteProxy\RouteProxy.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="TaskPlugDLL">
+        <MSBuild Projects="Plugin\TaskPlugDLL\TaskPlugDLL.dproj"/>
+    </Target>
+    <Target Name="TaskPlugDLL:Clean">
+        <MSBuild Projects="Plugin\TaskPlugDLL\TaskPlugDLL.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="TaskPlugDLL:Make">
+        <MSBuild Projects="Plugin\TaskPlugDLL\TaskPlugDLL.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="TaskPlugDLL1">
+        <MSBuild Projects="Plugin\TaskPlugDLL1\TaskPlugDLL1.dproj"/>
+    </Target>
+    <Target Name="TaskPlugDLL1:Clean">
+        <MSBuild Projects="Plugin\TaskPlugDLL1\TaskPlugDLL1.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="TaskPlugDLL1:Make">
+        <MSBuild Projects="Plugin\TaskPlugDLL1\TaskPlugDLL1.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="RPMPServer;RouteProxy;TaskPlugDLL;TaskPlugDLL1"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="RPMPServer:Clean;RouteProxy:Clean;TaskPlugDLL:Clean;TaskPlugDLL1:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="RPMPServer:Make;RouteProxy:Make;TaskPlugDLL:Make;TaskPlugDLL1:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

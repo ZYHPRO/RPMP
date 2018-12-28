@@ -1,3 +1,3 @@
 注意事项：
 
-   在发布项目是，需要把 borlndmm.dll 文件拷贝到 system32 文件夹内，否会报错
+   在发布项目是，需要把 borlndmm.dll 文件拷贝到 system32 文件夹内，否则会报错
