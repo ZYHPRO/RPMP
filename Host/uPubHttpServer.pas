@@ -67,7 +67,7 @@ var
   end;
 begin
   {$REGION 'GET Method'}
-  if Ctxt.Method = 'Get' then
+  if Ctxt.Method = 'GET' then
   begin
     Inc(FGetRequestCount);
     if not IdemPChar(pointer(Ctxt.URL),'/ROOT')  then begin
@@ -142,8 +142,6 @@ begin
   if Ctxt.Method = 'POST' then
   begin
     Inc(FPostRequestCount);
-    //frmServerMain.ShowMsgText(Ctxt.Method+' '+Ctxt.URL+'   '+Ctxt.InContent);
-    //必须是固定的接口才行
     try
       W := TTextWriter.CreateOwnedStream;
       ResultJson := FIRProxy.RouteWorkData(Ctxt.URL,Utf8ToAnsi(Ctxt.InContent),OutError);

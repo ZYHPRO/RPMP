@@ -65,13 +65,10 @@ begin
   Result := '{"data":"µÇÂ¼³É¹¦"}';
 end;
 function TServiceRemoteSQL.RecvDataGeneralControl(aUrlPath,aRecvStr: AnsiString; var Error: string): RawJSON;
-var
-  IntfParams: string;
 begin
   Result := '';
-  IntfParams := '/RpmpData/';
   {$REGION 'µÇÂ¼'}
-  if aUrlPath = IntfParams+'logininfo/1.0' then
+  if PosEx('logininfo/1.0',aUrlPath) > 0 then
   begin
     if not CheckRecvData(aRecvStr,Error) then
     begin

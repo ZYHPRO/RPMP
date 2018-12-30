@@ -16,7 +16,8 @@ uses
   GL_ServerFunction in '..\Public\GL_ServerFunction.pas',
   Impl_MsConnectionPool in '..\Public\Impl_MsConnectionPool.pas',
   Intf_MsConnectionPool in '..\Public\Intf_MsConnectionPool.pas',
-  MsDataBasePool in '..\Public\MsDataBasePool.pas';
+  MsDataBasePool in '..\Public\MsDataBasePool.pas',
+  uPubHttpServer in 'uPubHttpServer.pas';
 
 {$R *.res}
 var
