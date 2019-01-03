@@ -1,0 +1,19 @@
+1: 测试数据库为： MSSQL
+2：插入测试数据：
+
+  insert into T_PersonInfo(PerName,PerIdCard) values('王二麻子','1234567890')
+
+  insert into T_PersonInfo(PerName,PerIdCard) values('刘禅','3333333333')
+
+  insert into T_PersonInfo(PerName,PerIdCard) values('诸葛亮','55555555555')
+
+
+3：访问地址：
+
+  
+  http://127.0.0.1:8080/RpmpData/logininfo/1.0
+
+
+提交数据：
+
+   {"usercode":"37729@zyzs","perjmcode":"01deb483c9cb3dd55bf2aea7ae42a86e1e832b17","tasktype":"200","taskuser":"200101","deviceno":"0"}

@@ -12,6 +12,9 @@
         <Projects Include="Plugin\TaskPlugDLL\TaskPlugDLL.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="Plugin\TaskPlugDBDLL\TaskPlugDBDLL.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -47,14 +50,23 @@
     <Target Name="TaskPlugDLL:Make">
         <MSBuild Projects="Plugin\TaskPlugDLL\TaskPlugDLL.dproj" Targets="Make"/>
     </Target>
+    <Target Name="TaskPlugDBDLL">
+        <MSBuild Projects="Plugin\TaskPlugDBDLL\TaskPlugDBDLL.dproj"/>
+    </Target>
+    <Target Name="TaskPlugDBDLL:Clean">
+        <MSBuild Projects="Plugin\TaskPlugDBDLL\TaskPlugDBDLL.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="TaskPlugDBDLL:Make">
+        <MSBuild Projects="Plugin\TaskPlugDBDLL\TaskPlugDBDLL.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="RPMPServer;RouteProxy;TaskPlugDLL"/>
+        <CallTarget Targets="RPMPServer;RouteProxy;TaskPlugDLL;TaskPlugDBDLL"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="RPMPServer:Clean;RouteProxy:Clean;TaskPlugDLL:Clean"/>
+        <CallTarget Targets="RPMPServer:Clean;RouteProxy:Clean;TaskPlugDLL:Clean;TaskPlugDBDLL:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="RPMPServer:Make;RouteProxy:Make;TaskPlugDLL:Make"/>
+        <CallTarget Targets="RPMPServer:Make;RouteProxy:Make;TaskPlugDLL:Make;TaskPlugDBDLL:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
