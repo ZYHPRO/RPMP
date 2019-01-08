@@ -17,14 +17,14 @@ uses
   Impl_MsConnectionPool in '..\Public\Impl_MsConnectionPool.pas',
   Intf_MsConnectionPool in '..\Public\Intf_MsConnectionPool.pas',
   MsDataBasePool in '..\Public\MsDataBasePool.pas',
-  uPubHttpServer in 'uPubHttpServer.pas';
+  uPubHttpServer in 'uPubHttpServer.pas',
+  UpdatePlug in 'UpdatePlug.pas' {frmUpdatePlug};
 
 {$R *.res}
 var
   Hmutex:HWND;
 begin
   Application.Initialize;
-    ///不许进行打开多次
   Application.Title := 'RPMP服务器';
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TfrmServerMain, frmServerMain);

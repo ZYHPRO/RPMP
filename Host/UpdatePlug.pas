@@ -178,36 +178,8 @@ begin
 end;
 procedure TfrmUpdatePlug.Notify(const AId: Cardinal; AParams: IQParams;
   var AFireNext: Boolean);
-var
-  AParam: IQParam;
 begin
- { if Assigned(AParams) then
-  begin
-    case AId of
-      NID_PLUGIN_LOADING:
-        begin
-          AParam := AParams.ByName('File');
-          mmLogs.Lines.Add('正在加载插件 ' + ParamAsString(AParam) + ' ...');
-        end;
-      NID_PLUGIN_LOADED:
-        begin
-          FHoldService := PluginsManager.ByPath(PWideChar(Trim(edtRouter.Text)));
-          if Assigned(FHoldService) then
-            mmLogs.Lines.Add('HoldService 已经成功加载');
-        end;
-      NID_PLUGIN_UNLOADING:
-        begin
-          AParam := AParams.ByName('Instance');
-          if Assigned(AParam) and
-            (FHoldService.GetOwnerInstance = AParam.AsInt64) then
-          begin
-            FHoldService := nil;
-            AParam := AParams.ByName('File');
-            mmLogs.Lines.Add('正在卸载插件' + ParamAsString(AParam) + '，移除关联服务 ...');
-          end;
-        end;
-    end;
-  end;     }
+  //暂时停用
 end;
 procedure TfrmUpdatePlug.SpeedButton1Click(Sender: TObject);
 begin

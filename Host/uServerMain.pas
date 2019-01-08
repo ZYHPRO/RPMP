@@ -41,6 +41,8 @@ type
     TimerDelLog: TTimer;
     N_Exectetype: TMenuItem;
     tmr_AutoRun: TTimer;
+    N3: TMenuItem;
+    N4: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure pmRoServerStartClick(Sender: TObject);
     procedure pmRoServerStopClick(Sender: TObject);
@@ -53,6 +55,7 @@ type
     procedure N_ExectetypeClick(Sender: TObject);
     procedure tmr_AutoRunTimer(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure N4Click(Sender: TObject);
   private
     IsStared: Boolean;
     g_AutoRun: Byte;                  //自动运行标示  0 自动运行 1 手动运行
@@ -80,7 +83,7 @@ implementation
 
 {$R *.dfm}
 
-uses uServerSet;
+uses uServerSet, UpdatePlug;
 procedure TfrmServerMain.LoadPluginModule;
 var
   APath: String;
@@ -182,6 +185,12 @@ begin
   finally
     MIni.Free;
   end;
+end;
+
+procedure TfrmServerMain.N4Click(Sender: TObject);
+begin
+  Application.CreateForm(TfrmUpdatePlug,frmUpdatePlug);
+  frmUpdatePlug.ShowModal;
 end;
 
 procedure TfrmServerMain.N8Click(Sender: TObject);
