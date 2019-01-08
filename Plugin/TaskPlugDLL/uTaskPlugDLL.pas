@@ -35,11 +35,6 @@ type
     property AppTaskUserNo: string read FAppTaskUserNo;
   end;
 
-  TRemoteSQLService = class(TQService)
-  public
-    function GetInstance: IQService; override; stdcall;
-  end;
-
 implementation
 function TServiceRemoteSQL.GetPlugKey: string;
 begin
@@ -82,14 +77,11 @@ begin
   {$ENDREGION}
 end;
 
-function TRemoteSQLService.GetInstance: IQService;
-begin
-  Result := TServiceRemoteSQL.Create(NewId, ConstAppTaskNo+ConstAppTaskUserNo+'Service');
-end;
+
 initialization
 // 注册服务
 RegisterServices('Services/'+ConstAppTaskNo,
-  [TRemoteSQLService.Create(IRemoteSQL, ConstAppTaskUserNo)]);
+  [TServiceRemoteSQL.Create(NewId, ConstAppTaskUserNo)]);
 finalization
 // 取消服务注册
 UnregisterServices('Services/'+ConstAppTaskNo, [ConstAppTaskUserNo]);

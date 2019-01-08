@@ -42,11 +42,6 @@ type
     property AppTaskUserNo: string read FAppTaskUserNo;
   end;
 
-  TRemoteSQLService = class(TQService)
-  public
-    function GetInstance: IQService; override; stdcall;
-  end;
-
 implementation
 function TServiceRemoteSQL.GetPlugKey: string;
 begin
@@ -60,7 +55,7 @@ begin
   //创建数据库连接池
   Var_ServerInfo :=TDataSnapServerInfo.Create;
   //这里是数据库连接字符串,数据库目前使用的 MSSQL ,你可以换成 mysql 等等,Firdac支持N多数据库，看你的应用
-  Var_ServerInfo.ADOConnetStr := 'Name=Unnamed;DriverID=MSSQL;Server=.;Database=kbg;User_Name=sa;Password=sql';
+  Var_ServerInfo.ADOConnetStr := 'Name=Unnamed;DriverID=MSSQL;Server=.;Database=JXTESTDATAWHNEW;User_Name=sa;Password=sql';
   SetLength(arrDataBasePool,1);
   SetLength(VAR_ArrSQLConStr,1);
   Var_ServerInfo.ConnectionCount := 2;
@@ -120,7 +115,7 @@ begin
         aQjson.Clear;
         aQjson.Add('message','ok',jdtString);
         vData := '';
-        aQjson.Add('perjmcode','',jdtString);
+        aQjson.Add('perjmcode','01234567890',jdtString);
         aQjson.Add('datacount', IntToStr(TempQuery.RecordCount),jdtString);
         resultqjson := aQjson.AddArray('datalist');
         for I := Low(kwArry) to High(kwArry) do
@@ -168,14 +163,10 @@ begin
   {$ENDREGION}
 end;
 
-function TRemoteSQLService.GetInstance: IQService;
-begin
-  Result := TServiceRemoteSQL.Create(NewId, ConstAppTaskNo+ConstAppTaskUserNo+'Service');
-end;
 initialization
 // 注册服务
 RegisterServices('Services/'+ConstAppTaskNo,
-  [TRemoteSQLService.Create(IRemoteSQL, ConstAppTaskUserNo)]);
+  [ TServiceRemoteSQL.Create(NewId, ConstAppTaskUserNo)]);
 finalization
 // 取消服务注册
 UnregisterServices('Services/'+ConstAppTaskNo, [ConstAppTaskUserNo]);
