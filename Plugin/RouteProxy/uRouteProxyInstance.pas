@@ -27,10 +27,6 @@ type
     destructor Destroy; override;
   end;
 
-  TRouteProxyService = class(TQService)
-  public
-    function GetInstance: IQService; override; stdcall;
-  end;
 
 implementation
 
@@ -461,16 +457,10 @@ begin
   end;
 end;
 
-{ TDockInstanceService }
-
-function TRouteProxyService.GetInstance: IQService;
-begin
-  Result := TPubRouteProxy.Create(NewId, 'PubRouteProxyService');
-end;
 initialization
-// 注册 /Services/Docks/Frame 服务
+// 注册 /Services/PubRouteProxys/PubRouteProxy 服务
 RegisterServices('Services/PubRouteProxys',
-  [TRouteProxyService.Create(IRouteProxy, 'PubRouteProxy')]);
+  [TPubRouteProxy.Create(NewId, 'PubRouteProxy')]);
 finalization
 // 取消服务注册
 UnregisterServices('Services/PubRouteProxys', ['PubRouteProxy']);
