@@ -18,7 +18,8 @@ uses
   Intf_MsConnectionPool in '..\Public\Intf_MsConnectionPool.pas',
   MsDataBasePool in '..\Public\MsDataBasePool.pas',
   uPubHttpServer in 'uPubHttpServer.pas',
-  UpdatePlug in 'UpdatePlug.pas' {frmUpdatePlug};
+  UpdatePlug in 'UpdatePlug.pas' {frmUpdatePlug},
+  uPubVariableSet in '..\Public\uPubVariableSet.pas';
 
 {$R *.res}
 var

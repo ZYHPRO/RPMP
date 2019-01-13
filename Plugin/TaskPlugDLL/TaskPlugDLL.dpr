@@ -16,7 +16,8 @@ uses
   System.Classes,
   uTaskPlugDLL in 'uTaskPlugDLL.pas',
   sfLog in '..\..\Public\sfLog.pas',
-  TaskServerIntf in '..\..\Public\TaskServerIntf.pas';
+  TaskServerIntf in '..\..\Public\TaskServerIntf.pas',
+  uPubVariableSet in '..\..\Public\uPubVariableSet.pas';
 
 {$R *.res}
 

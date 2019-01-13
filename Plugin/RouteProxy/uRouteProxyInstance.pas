@@ -8,13 +8,17 @@ unit uRouteProxyInstance;
 interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
-  System.Classes,qjson, QString, QPlugins, Vcl.Imaging.jpeg,qplugins_base,
+  System.Classes,qjson, QString, QPlugins,qplugins_base,uPubVariableSet,
   uRouteProxyFunc,SynCommons,TaskServerIntf;
 type
 
-  TPubRouteProxy = class(TQService, IRouteProxy)
+  TPubRouteProxy = class(TQService, IRouteProxy,IQNotify)
   private
     RecvJson,aQjson: TQJson;
+    FAMgr: IQNotifyManager;
+    FNotifyId: array[0..1] of Integer;
+    procedure Notify(const AId: Cardinal; AParams: IQParams;
+      var AFireNext: Boolean); stdcall;
   protected
     //业务校验数据正确与否
     function CheckWorkData(aRecvStr: AnsiString; var Error: string): Boolean; stdcall;
@@ -35,8 +39,37 @@ begin
   inherited Create(AId, AName);
   RecvJson := TQJson.Create;
   aQjson := TQJson.Create;
+  //通知注册初始化
+  FAMgr := PluginsManager as IQNotifyManager;
+  FNotifyId[0] := FAMgr.IdByName(PWideChar(NotifyServerStart));
+  FAMgr.Subscribe(FNotifyId[0], Self);
+  FNotifyId[1] := FAMgr.IdByName(PWideChar(NotifyServerStop));
+  FAMgr.Subscribe(FNotifyId[1], Self);
+  FAMgr.Subscribe(NID_PLUGIN_UNLOADING, Self);
 end;
-
+procedure TPubRouteProxy.Notify(const AId: Cardinal; AParams: IQParams;
+  var AFireNext: Boolean);
+var
+  vStr: string;
+begin
+  //自定义通知,服务启动
+  if AId = FNotifyId[0] then
+  begin
+    vStr := '服务器启动...';
+  end;
+  //自定义通知,服务关闭
+  if AId = FNotifyId[1] then
+  begin
+    vStr := '服务器停止...';
+  end;
+  //预定义通知,服务准备卸载
+  if AId = NID_PLUGIN_UNLOADING then
+  begin
+    FAMgr.unSubscribe(FNotifyId[0], Self);
+    FAMgr.unSubscribe(FNotifyId[1], Self);
+    FAMgr.Unsubscribe(NID_PLUGIN_UNLOADING, Self);
+  end;
+end;
 destructor TPubRouteProxy.Destroy;
 begin
   FreeAndNil(RecvJson);

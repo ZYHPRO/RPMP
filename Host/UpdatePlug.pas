@@ -159,22 +159,22 @@ end;
 
 procedure TfrmUpdatePlug.FormCreate(Sender: TObject);
 begin
-  with PluginsManager as IQNotifyManager do
+ { with PluginsManager as IQNotifyManager do
   begin
     Subscribe(NID_PLUGIN_LOADING, Self);
     Subscribe(NID_PLUGIN_UNLOADING, Self);
     Subscribe(NID_PLUGIN_LOADED, Self);
-  end;
+  end;  }
 end;
 
 procedure TfrmUpdatePlug.FormDestroy(Sender: TObject);
 begin
-  with PluginsManager as IQNotifyManager do
+  {with PluginsManager as IQNotifyManager do
   begin
     Unsubscribe(NID_PLUGIN_LOADING, Self);
     Unsubscribe(NID_PLUGIN_UNLOADING, Self);
     Unsubscribe(NID_PLUGIN_LOADED, Self);
-  end;
+  end; }
 end;
 procedure TfrmUpdatePlug.Notify(const AId: Cardinal; AParams: IQParams;
   var AFireNext: Boolean);

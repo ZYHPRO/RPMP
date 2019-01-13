@@ -21,7 +21,8 @@ uses
   Impl_MsConnectionPool in '..\..\Public\Impl_MsConnectionPool.pas',
   Intf_MsConnectionPool in '..\..\Public\Intf_MsConnectionPool.pas',
   MsDataBasePool in '..\..\Public\MsDataBasePool.pas',
-  uTaskPlugDBDLL in 'uTaskPlugDBDLL.pas';
+  uTaskPlugDBDLL in 'uTaskPlugDBDLL.pas',
+  uPubVariableSet in '..\..\Public\uPubVariableSet.pas';
 
 {$R *.res}
 

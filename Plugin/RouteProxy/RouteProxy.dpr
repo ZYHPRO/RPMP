@@ -16,7 +16,8 @@ uses
   System.Classes,
   uRouteProxyInstance in 'uRouteProxyInstance.pas',
   TaskServerIntf in '..\..\Public\TaskServerIntf.pas',
-  uRouteProxyFunc in '..\..\Public\uRouteProxyFunc.pas';
+  uRouteProxyFunc in '..\..\Public\uRouteProxyFunc.pas',
+  uPubVariableSet in '..\..\Public\uPubVariableSet.pas';
 
 {$R *.res}
 

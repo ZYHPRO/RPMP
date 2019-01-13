@@ -6,8 +6,8 @@ uses Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.DateUtils,  System.ImageList, System.Classes,System.IniFiles,
   Vcl.ExtCtrls, Vcl.Dialogs,Vcl.ComCtrls, Vcl.Grids, Vcl.StdCtrls,Vcl.Imaging.pngimage,
   Vcl.ImgList, Vcl.Controls, Vcl.AppEvnts, Vcl.Menus,Vcl.Graphics, Vcl.Forms,
-  PubConst,EDDES,GL_ServerFunction,GL_ServerConst,uPubHttpServer,
-  QPlugins, QPlugins_loader_lib,QPlugins_Vcl_Messages;
+  PubConst,EDDES,GL_ServerFunction,GL_ServerConst,uPubHttpServer,uPubVariableSet,
+  QPlugins,qplugins_base,qplugins_params, QPlugins_loader_lib,QPlugins_Vcl_Messages;
   {$I SynDprUses.inc} // use FastMM4 on older Delphi, or set FPC threads
 
 type
@@ -74,6 +74,13 @@ type
     procedure StartListen;
     //加载插件
     procedure LoadPluginModule;
+    /// <summary>
+    /// 发送全局通知
+    /// </summary>
+    /// <param name="flag">
+    ///  Falg 通知类型   0 服务运行通知  1 服务停止通知
+    /// </param>
+    procedure OperServerNotify(Flag: Integer);
   end;
 
 var
@@ -94,8 +101,20 @@ begin
   PluginsManager.Loaders.Add(TQDLLLoader.Create(APath, '.dll'));
   // 启动插件注册，如果要显示加载进度，可以注册IQNotify响应函数响应进度通知
   PluginsManager.Start;
+  FChangeNotifyId[0] := (PluginsManager as IQNotifyManager).IdByName(PWideChar(NotifyServerStart));
+  FChangeNotifyId[1] := (PluginsManager as IQNotifyManager).IdByName(PWideChar(NotifyServerStop));
 end;
-
+procedure TfrmServerMain.OperServerNotify(Flag: Integer);
+begin
+  if flag = 0 then
+  begin
+   (PluginsManager as IQNotifyManager).Send(FChangeNotifyId[0], NewParams([0]));
+  end;
+  if flag = 1 then
+  begin
+    (PluginsManager as IQNotifyManager).Send(FChangeNotifyId[1], NewParams([0]));
+  end;
+end;
 procedure TfrmServerMain.ShowMsgText(S: string);
 begin
   if MmoLog.Lines.Count > 1000 then
@@ -234,6 +253,8 @@ begin
   pmRoServerStart.Enabled := False;
   pmRoServerStop.Enabled := True;
   TimerDelLog.Enabled := True;
+  //服务开始通知
+  OperServerNotify(0);
   ShowMsgText('服务程序启动成功！');
 end;
 procedure TfrmServerMain.StopListen;
@@ -246,6 +267,8 @@ begin
   IsStared := False;
   pmRoServerStart.Enabled := True;
   pmRoServerStop.Enabled := False;
+  //服务器停止运行通知
+  OperServerNotify(1);
   ShowMsgText('服务程序已经关闭！');
 end;
 procedure TfrmServerMain.TimerDelLogTimer(Sender: TObject);
