@@ -8,6 +8,9 @@ RPMP-Restful Plugin Midware for Pascal 是基于 mORmot 和 Qplugins 框架二�
 ##关于作品
 
   如果您基于该开源产品开发了产品，请给作者发送个截图，主要为了宣传，完全自愿。谢谢
+  
+##基于该框架所做的应用截图
+![image](https://github.com/ZYHPRO/RPMP/blob/master/doc/ProductScreenShot/xsserver/xsserver.png)  
 
 ## 关于文档帮助
 	
