@@ -7,9 +7,13 @@ RPMP-Restful Plugin Midware for Pascal 是基于 mORmot 和 Qplugins 框架二�
 # 未来更新计划
 
   1、完善插件热更新功能
+  
   2、支持身份认证(jwt\OAuth 2.0 等)
+  
   3、访问控制，api接口管理(有好的建议可以提)
+  
   4、文档及偏业务插件完整流程
+  
   5、该框架完善完毕,后续会分出针对不同的应用场景的RPMP系列服务器，比如 Restful server 目前这款就是, Webserver 主要针对网站等, file server 主要针      对文件发送接收
   
 # 关于作品
