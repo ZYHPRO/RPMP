@@ -26,13 +26,13 @@ object frmUpdatePlug: TfrmUpdatePlug
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 0
-    object SpeedButton1: TSpeedButton
-      Left = 464
+    object btnSelect: TSpeedButton
+      Left = 462
       Top = 8
       Width = 79
       Height = 25
       Caption = #36873#25321#25554#20214'...'
-      OnClick = SpeedButton1Click
+      OnClick = btnSelectClick
     end
     object Label1: TLabel
       Left = 8
@@ -48,14 +48,14 @@ object frmUpdatePlug: TfrmUpdatePlug
       Height = 13
       Caption = #25554#20214#36335#30001#36335#24452#65306
     end
-    object Button2: TButton
+    object btnUpdate: TButton
       Left = 462
       Top = 35
       Width = 79
       Height = 25
       Caption = #26356#26032
       TabOrder = 0
-      OnClick = Button2Click
+      OnClick = btnUpdateClick
     end
     object edtPluginsFile: TEdit
       Left = 68

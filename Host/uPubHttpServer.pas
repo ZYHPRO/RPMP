@@ -37,6 +37,7 @@ begin
   fServer.AddUrl('',FListenPort,false,'+',true);
   fServer.RegisterCompress(CompressGZip);
   fServer.OnRequest := Process;
+  FServer.Clone(7);
   fPath := IncludeTrailingPathDelimiter(Path);
   FIRProxy := PluginsManager.ByPath('Services/PubRouteProxys/PubRouteProxy') as IRouteProxy;
   FPostRequestCount := 0;
@@ -45,6 +46,7 @@ end;
 
 destructor TPubRestServer.Destroy;
 begin
+  fServer.RemoveUrl('',StringTOUTF8(FListenPort), False, '+');
   fServer.Free;
   inherited;
 end;

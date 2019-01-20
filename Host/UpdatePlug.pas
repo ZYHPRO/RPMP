@@ -10,18 +10,18 @@ uses
 type
   TfrmUpdatePlug = class(TForm, IQNotify)
     Panel1: TPanel;
-    Button2: TButton;
+    btnUpdate: TButton;
     mmLogs: TMemo;
     dlgOpen: TOpenDialog;
     edtPluginsFile: TEdit;
-    SpeedButton1: TSpeedButton;
+    btnSelect: TSpeedButton;
     Label1: TLabel;
     Label2: TLabel;
     edtRouter: TEdit;
-    procedure Button2Click(Sender: TObject);
+    procedure btnUpdateClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
-    procedure SpeedButton1Click(Sender: TObject);
+    procedure btnSelectClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -126,7 +126,7 @@ begin
     end;
   end;
 end;
-procedure TfrmUpdatePlug.Button2Click(Sender: TObject);
+procedure TfrmUpdatePlug.btnUpdateClick(Sender: TObject);
 var
   FFileName: String;
 begin
@@ -140,20 +140,33 @@ begin
     mmLogs.Lines.Add('请填写插件路由路径...');
     Exit;
   end;
-  //卸载插件
-  if UnLoadPlug(Trim(edtRouter.Text)) then
+  //获取当前目录下面的插件路径
+  FFileName := ExtractFilePath(Application.ExeName)+ExtractFileName(Trim(edtPluginsFile.Text));
+  //判断是否已存在,如果该插件存在，先卸载再加载，否则直接加载
+  if FileExists(FFileName) then
+  begin
+    //卸载插件
+    if UnLoadPlug(Trim(edtRouter.Text)) then
+    begin
+      //复制替换
+      CopyFile(PChar(Trim(edtPluginsFile.Text)),PChar(FFileName), False);
+      //重新加载
+      LoadPlug(FFileName);
+      mmLogs.Lines.Add('插件更新成功...');
+    end
+    else
+    begin
+      mmLogs.Lines.Add('卸载插件失败...');
+      Exit;
+    end;
+  end
+  else
   begin
     //复制替换
-    FFileName := ExtractFilePath(Application.ExeName)+ExtractFileName(Trim(edtPluginsFile.Text));
     CopyFile(PChar(Trim(edtPluginsFile.Text)),PChar(FFileName), False);
     //重新加载
     LoadPlug(FFileName);
     mmLogs.Lines.Add('插件更新成功...');
-  end
-  else
-  begin
-    mmLogs.Lines.Add('卸载插件失败...');
-    Exit;
   end;
 end;
 
@@ -181,7 +194,7 @@ procedure TfrmUpdatePlug.Notify(const AId: Cardinal; AParams: IQParams;
 begin
   //暂时停用
 end;
-procedure TfrmUpdatePlug.SpeedButton1Click(Sender: TObject);
+procedure TfrmUpdatePlug.btnSelectClick(Sender: TObject);
 begin
   if dlgOpen.Execute then
   begin
